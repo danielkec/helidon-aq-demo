@@ -1,0 +1,25 @@
+server.static.classpath.location: /WEB
+server.static.classpath.welcome: index.html
+
+javax:
+  sql:
+    DataSource:
+      hackaton-ds:
+        connectionFactoryClassName: oracle.jdbc.pool.OracleDataSource
+        URL: jdbc:oracle:thin:@test1aqdb_high?TNS_ADMIN=/home/kec/wallets/test1aqdb
+        user: frank
+        password: SuperSecretPassword1234
+
+mp:
+  messaging:
+    connector:
+      helidon-aq:
+        data-source: hackaton-ds
+    outgoing.to-aq:
+      connector: helidon-aq
+      destination: example_queue_1
+      type: queue
+    incoming.from-aq:
+      connector: helidon-aq
+      destination: example_queue_1
+      type: queue
